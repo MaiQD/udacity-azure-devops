@@ -20,7 +20,11 @@ For this project, you will write a Packer template and a Terraform template to d
 4. Install [Terraform](https://www.terraform.io/downloads.html)
 
 ## Instructions
-1. Create a new Azure policy
+1. Login to Azure
+```bash
+az login
+```
+2. Create a new Azure policy
 
 Open folder containing the resources you want to deploy with terminal.\
 Run the following command to deploy the policy:
@@ -31,6 +35,18 @@ az policy definition create -n "tagged-policy" --mode All --rules "./tagging-pol
 ```bash
 az policy assignment create --policy "tagged-policy" -n "tagged-policy" --description "Ensures all indexed resources are tagged"
 ```
+
+3. Create a new Azure resource group
+```bash
+az group create -l "eastasia" -n "udacity-vm-images" --tags "udacity[=project1]"
+```
+
+4. Deploy a new image to Azure
+```bash
+packer build  -var 'subscription_id=YOUR_SUBSCRIPTION_ID' .\server.json
+```
 ### Output
 1. You should see the following output when you use `az policy assignment list` to show the list of policy assignment:
 ![list policy assignment](assets/tagged-policy.png)
+2. When you use `az image show -n "udacity-vm-image" -g "udacity-vm-images"`, you should see the detail of following image:
+![vm image deploy by packer](assets/udacity-vm-image.png)

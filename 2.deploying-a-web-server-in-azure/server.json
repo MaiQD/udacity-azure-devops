@@ -5,7 +5,26 @@
 		"subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}"
 	},
 	"builders": [{
-		
+		"type": "azure-arm",
+		"use_azure_cli_auth": true,
+
+		"client_id": "{{user `client_id`}}",
+		"client_secret": "{{user `client_secret`}}",
+		"subscription_id": "{{user `subscription_id`}}",
+
+		"os_type": "Linux",
+		"image_publisher": "Canonical",
+		"image_offer": "UbuntuServer",
+		"image_sku": "18.04-LTS",
+		"azure_tags":{
+			"udacity": "project1"
+		},
+
+		"managed_image_resource_group_name": "udacity-vm-images",
+		"managed_image_name": "udacity-vm-image",
+
+		"location": "eastasia",
+		"vm_size": "Standard_B1s"
 	}],
 	"provisioners": [{
 		"inline": [
