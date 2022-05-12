@@ -63,10 +63,16 @@ terraform init
 terraform.exe plan -out solution.plan
 terraform apply "solution.plan"
 ```
+When you want to destroy the resources, run the following command:
+```bash
+terraform destroy
+```
 ### Output
 1. You should see the following output when you use `az policy assignment list` to show the list of policy assignment:
 ![list policy assignment](assets/tagged-policy.png)
 2. When you use `az image show -n "udacity-vm-image" -g "udacity-vm-images"`, you should see the detail of following image:
 ![vm image deploy by packer](assets/udacity-vm-image.png)
-3. Go to the azure portal and check the VM is deployed correctly in resource group.
-![resources deploy by terraform](assets/resources-in-azure-portal.png)
+3. You should see the following output when you run command `terraform apply "solution.plan"` as instructed above:
+![terraform apply](assets/result-of-terraform-apply.png)
+4. You should see the following output when you run command `terraform destroy`:
+![terraform destroy](assets/result-of-terraform-destroy.png)
