@@ -46,6 +46,35 @@ resource "azurerm_network_security_group" "main" {
     azurerm_resource_group.main
   ]
 }
+resource "azurerm_network_security_rule" "main_allow" {
+  name                        = "${var.prefix}-allow"
+  priority                    = "100"
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "22"
+  source_address_prefix       = "10.0.1.0/24"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.main.name
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
+
+resource "azurerm_network_security_rule" "main_deny" {
+  name                        = "${var.prefix}-deny"
+  priority                    = "200"
+  direction                   = "Inbound"
+  access                      = "Deny"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "Internet"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.main.name
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
 # Associate the NSG with the subnet.
 resource "azurerm_subnet_network_security_group_association" "main" {
   subnet_id                 = azurerm_subnet.internal.id
@@ -135,7 +164,7 @@ resource "azurerm_virtual_machine" "main" {
   location                      = azurerm_resource_group.main.location
   vm_size                       = "Standard_B1s"
   delete_os_disk_on_termination = true
-  
+
   network_interface_ids = [
     element(azurerm_network_interface.main.*.id, count.index)
   ]
