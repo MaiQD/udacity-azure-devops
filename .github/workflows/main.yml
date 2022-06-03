@@ -29,4 +29,5 @@ jobs:
       - name: Run a one-line script
         run: |
           cd 5.ci-cd-pipelines 
+          make install
           make test
