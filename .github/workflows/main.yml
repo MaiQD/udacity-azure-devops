@@ -27,4 +27,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: make hello
+        run: |
+          cd 5.ci-cd-pipelines 
+          make hello
