@@ -24,10 +24,20 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Set up python 3.5
+        uses: action/setup-python@v1
+        with:
+          python-version: 3.5
+      - name: go to directory
         run: |
-          cd 5.ci-cd-pipelines 
+          cd 5.ci-cd-pipelines
+      - name: install dependency
+        run: |
           make install
+      - name: Lint with pylint
+        run: |
+          make lint
+      # Runs a single command using the runners shell
+      - name: Test with pytest
+        run: |
           make test
