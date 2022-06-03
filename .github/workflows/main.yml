@@ -33,11 +33,14 @@ jobs:
           cd 5.ci-cd-pipelines
       - name: install dependency
         run: |
+          cd 5.ci-cd-pipelines
           make install
       - name: Lint with pylint
         run: |
+          cd 5.ci-cd-pipelines
           make lint
       # Runs a single command using the runners shell
       - name: Test with pytest
         run: |
+          cd 5.ci-cd-pipelines
           make test
