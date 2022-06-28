@@ -1,3 +1,5 @@
 .vscode/configurationCache.log
 .vscode/dryrun.log
 .vscode/targets.log
+5.ci-cd-pipelines/__pycache__/test_hello.cpython-*-pytest-*.pyc
+5.ci-cd-pipelines/__pycache__/hello.cpython-*.pyc
