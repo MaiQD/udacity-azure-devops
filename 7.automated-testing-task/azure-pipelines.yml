@@ -15,5 +15,5 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: 'newman run ./7.automated-testing-task/StarterAPIs.json'
+        script: 'newman run starterapis.json'
         workingDirectory: '7.automated-testing-task'
