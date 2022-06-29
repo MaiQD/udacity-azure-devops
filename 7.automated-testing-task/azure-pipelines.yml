@@ -16,4 +16,4 @@ stages:
       continueOnError: true
       inputs:
         script: 'newman run ./7.automated-testing-task/StarterAPIs.json'
-        workingDirectory: 'starter-code/automatedtesting/postman'
+        workingDirectory: '7.automated-testing-task'
