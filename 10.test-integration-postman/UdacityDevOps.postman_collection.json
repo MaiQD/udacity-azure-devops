@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "965201d7-e593-4d8e-a7b9-5469baa72b96",
+		"name": "UdacityDevOps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9912610"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get All Posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check post id get is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var postId = pm.environment.get(\"postId\");\r",
+									"    pm.expect(jsonData[0].id).to.eql(postId);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}posts?id={{postId}}",
+							"host": [
+								"{{baseurl}}posts"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{postId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comment By Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}comments?postId=1",
+							"host": [
+								"{{baseurl}}comments"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Set evn post id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var postId = jsonData.id;\r",
+									"\r",
+									"    pm.environment.set(\"postId\", postId);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": \"2\",\r\n    \"title\": \"title\",\r\n    \"body\": \"teats2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}posts",
+							"host": [
+								"{{baseurl}}posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
